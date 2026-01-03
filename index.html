@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class Attendance Redirect</title>
+    <script>
+        // Initialize FingerprintJS
+        const fpPromise = import('https://openfpcdn.io/fingerprintjs/v4')
+            .then(FingerprintJS => FingerprintJS.load());
+
+        fpPromise
+            .then(fp => fp.get())
+            .then(result => {
+                const visitorId = result.visitorId;
+                
+                // YOUR GOOGLE FORM CONFIGURATION
+                const baseUrl = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform";
+                const entryId = "entry.1234567"; // Replace with your entry ID from Step 1
+                
+                // Redirect to the form with the Device ID pre-filled
+                window.location.href = `${baseUrl}?usp=pp_url&${entryId}=${visitorId}`;
+            });
+    </script>
+</head>
+<body>
+    <p>Loading attendance system... please wait.</p>
+</body>
+</html>
