@@ -13,21 +13,15 @@
                 const visitorId = result.visitorId;
                 
                 // YOUR GOOGLE FORM CONFIGURATION
-                const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdoNw3M0zioHTs-wzziK_Euvn5RGzgzDHojJNTzgIX7HRmKYQ/viewform?usp=pp_url&entry.1348728019=ID";
+                const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdoNw3M0zioHTs-wzziK_Euvn5RGzgzDHojJNTzgIX7HRmKYQ/viewform?usp=pp_url&";
                 const entryId = "entry.1348728019=ID"; // Replace with your entry ID from Step 1
                 
                 // Redirect to the form with the Device ID pre-filled
-                window.location.href = `${baseUrl}${entryId}=${visitorId}`;
+                window.location.href = `${baseUrl}?usp=pp_url&${entryId}=${visitorId}`;
             });
     </script>
 </head>
 <body>
     <p>Loading attendance system... please wait.</p>
 </body>
-
 </html>
-
-
-
-
-
