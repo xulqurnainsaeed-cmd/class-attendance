@@ -17,7 +17,7 @@
                 const entryId = "entry.1348728019=ID"; // Replace with your entry ID from Step 1
                 
                 // Redirect to the form with the Device ID pre-filled
-                window.location.href = `${baseUrl}?usp=pp_url&${entryId}=${visitorId}`;
+                window.location.href = `${baseUrl}${entryId}=${visitorId}`;
             });
     </script>
 </head>
@@ -26,6 +26,7 @@
 </body>
 
 </html>
+
 
 
 
