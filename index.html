@@ -1,28 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Class Attendance Redirect</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Attendance System</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f4f4f9; }
+        .loader { text-align: center; }
+        .spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 36px; height: 36px; border-radius: 50%; border-left-color: #09f; animation: spin 1s linear infinite; margin: 0 auto 10px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+    
     <script>
-        // Initialize FingerprintJS
+        // Initialize FingerprintJS from CDN
         const fpPromise = import('https://openfpcdn.io/fingerprintjs/v4')
             .then(FingerprintJS => FingerprintJS.load());
 
         fpPromise
             .then(fp => fp.get())
             .then(result => {
+                // This is the Unique Device ID (UDF)
                 const visitorId = result.visitorId;
                 
-                // YOUR GOOGLE FORM CONFIGURATION
-                const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdoNw3M0zioHTs-wzziK_Euvn5RGzgzDHojJNTzgIX7HRmKYQ/viewform?usp=pp_url&entry.1348728019=ID";
-                const entryId = "entry.1348728019=ID"; // Replace with your entry ID from Step 1
+                // Your specific Google Form details
+                const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdoNw3M0zioHTs-wzziK_Euvn5RGzgzDHojJNTzgIX7HRmKYQ/viewform";
+                const entryId = "entry.1348728019"; // Your specific Entry ID for Device ID
                 
-                // Redirect to the form with the Device ID pre-filled
-                window.location.href = `${baseUrl}?usp=pp_url&${entryId}=${visitorId}`;
+                // Construct the pre-filled URL
+                const finalUrl = `${baseUrl}?usp=pp_url&${entryId}=${visitorId}`;
+                
+                // Redirect the student to the form
+                window.location.href = finalUrl;
+            })
+            .catch(error => {
+                console.error("Identification error:", error);
+                document.getElementById('status').innerText = "Error loading system. Please check your internet connection.";
             });
     </script>
 </head>
 <body>
-    <p>Loading attendance system... please wait.</p>
+    <div class="loader">
+        <div class="spinner"></div>
+        <p id="status">Verifying device and opening attendance form...</p>
+    </div>
 </body>
 </html>
-
